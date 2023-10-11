@@ -1,6 +1,20 @@
 package com.example.Temperature_Measurement.readings;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table
 public class Readings {
+    @Id
+    @SequenceGenerator(
+            name = "readings_sequence",
+            sequenceName = "readings_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "readings_sequence"
+    )
     private Long id_sec;
     private Float sens_read_sun;
     private Float sens_read_shadow;
