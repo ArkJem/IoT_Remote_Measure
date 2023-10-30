@@ -1,20 +1,15 @@
 import './App.css';
-import {Link, Route, Router, Routes} from 'react-router-dom';
-import {useTypingEffect} from "./hooks/typing-effect";
-import {Button} from "@mui/material";
+import {Link, Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import Login from "./components/LoginPg/Login";
-
+import FrontPage from "./components/FrontPg/FrontPage";
 function App() {
-    const text = useTypingEffect("ZDALNY POMIAR TEMPERATURY",150);
     return (
-        <div className="App">
-            {text}
-            <div>
-                <Button variant="contained" to="/login">
-                    Zaloguj się
-                </Button>
-            </div>
-        </div>
+       <Router>
+           <Routes>
+               <Route path={"/"} element={<FrontPage/>}/>
+               <Route path={"/login"} element={<Login/>} />
+           </Routes>
+       </Router>
     );
 }
 
