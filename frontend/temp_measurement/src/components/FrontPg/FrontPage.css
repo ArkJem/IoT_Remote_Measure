@@ -1,8 +1,11 @@
 .frontPg {
-    width: 100vw;
+    width: auto;
     height: 100vh;
     text-align: center;
     background-color:#222831;
     color:#00ADB5;
     font-size: 80px;
+}
+.btn{
+    float: inherit;
 }
