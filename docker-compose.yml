@@ -4,7 +4,7 @@ services:
     container_name: postgres
     image: postgres:latest
     ports:
-    - "5432:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
@@ -14,8 +14,8 @@ services:
   backend:
     container_name: temp_measure
     build:
-        context: .
-        dockerfile: Dockerfile
+      context: ./server/Temperature_Measurement/
+      dockerfile: Dockerfile
     depends_on:
       - database
     ports:
@@ -25,3 +25,14 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=admin
     restart: always
+
+  web:
+    restart: always
+    container_name: react
+    build:
+      context: ./frontend/temp_measurement/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend

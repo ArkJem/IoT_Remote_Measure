@@ -29,10 +29,10 @@ const RealTimeChart = () => {
   };
 
   return (
-    <div>
-      <h1>Real-Time Chart</h1>
-      <Line data={data} options={chartOptions} />
-    </div>
+      <div>
+        <h1>Real-Time Chart</h1>
+        <Line data={data} options={chartOptions} />
+      </div>
   );
 };
 

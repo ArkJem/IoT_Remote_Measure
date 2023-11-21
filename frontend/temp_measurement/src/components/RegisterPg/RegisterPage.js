@@ -20,6 +20,7 @@ export default function RegisterPage(){
         marginTop: "1em",
         height: "50px"
     }
+    const URL = "http://localhost:8080/api/v1/auth/register"
     const [surname,setSurname] = useState("");
     const [name,setName] = useState("");
     const [username, setUsername] = useState("");
@@ -34,9 +35,34 @@ export default function RegisterPage(){
         password:password,
     };
 
-    const register = () => {
-        console.log(data);
-    }
+    const handleRegister = () => {
+        fetch(URL, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.status === 403) {
+                    throw new Error("Access forbidden");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                if (error.message === "Access forbidden") {
+                    console.log("lol");
+                }
+                else{
+                    console.error("An error occurred:", error);
+                }
+            });
+    };
 
 
 
@@ -127,7 +153,7 @@ export default function RegisterPage(){
                     type="password"
                 />
                     <Button variant="contained" color="error" style={ButtonCSS} href={"/"} >Wróć</Button>
-                    <Button variant="contained" color="primary" style={ButtonCSS} onClick={register}>Zarejestruj się</Button>
+                    <Button variant="contained" color="primary" style={ButtonCSS} onClick={handleRegister}>Zarejestruj się</Button>
 
                 </Container>
         </Grid>
