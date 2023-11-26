@@ -1,54 +1,120 @@
+meta {
+    name: viewport;
+    content: width=device-width, initial-scale=1;
+}
+
 .container {
     width: 100%;
-    height: 100%;
-    background-color:#222831;
-    color:#00ADB5;
-    min-height: 1000px;
-    min-width: 1000px;
+    height: 110vh; /* Set height to viewport height */
+    background-color: #222831;
+    color: white;
+    background: url('../img/bg_security.jpg') no-repeat center center fixed;
+    background-size: cover;
+    box-sizing: border-box;
 }
 
 table {
-    background: #344966;
+    background: #2196F3;
     width: 100%;
     border-collapse: collapse;
-    height: 5vh;
+    height: 3vh;
 }
-link {
+
+.link {
     position: absolute;
     top: 0;
     right: 0;
     text-decoration: none;
-    color: #007bff; /* Adjust the color as needed */
+    color: #007bff;
 }
-a{
-    margin: 100px;
-    color:#00B0E6;
-    text-decoration: none;
-    font-size: 20px;
 
+a {
+    color: white;
+    text-decoration: none;
+    font-size: 1vw;
 }
-a:hover
-{
+
+a:hover {
     background: #B4CDED;
     border-radius: 5%;
 }
-.main
-{
-    background: #9073F5;
-    width: auto;
-    height: 1000px;
+
+.main {
+    background: #212020;
+    width: 100%;
+    box-sizing: border-box;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 50vh;
+}
+
+.textMain {
+    color: white;
+    font-size: 2vw;
+}
+
+.buttonMain {
+    margin-top: 1vh;
+
+}
+
+.buttonMain button {
+    margin: 1vw;
+
+}
+.btnSpec{
+    background-color:#ffffff;
+    border-radius:28px;
+    border:1px solid #2195f3;
+    display:inline-block;
+    cursor:pointer;
+    color:#2195f3;
+    font-family:Arial;
+    font-size:17px;
+    padding:16px 31px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #ffffff;
+    margin-left:2vw;
+
+}
+.btn {
+    background-color:#ffffff;
+    border-radius:28px;
+    border:1px solid #2195f3;
+    display:inline-block;
+    cursor:pointer;
+    color:#2195f3;
+    font-family:Arial;
+    font-size:17px;
+    padding:16px 31px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #ffffff;
+}
+
+.afterMain {
+    background: #2196F3;
+    width: 100%;
+    height: 50vh;
+    box-sizing: border-box;
+    opacity: 90%;
+}
+
+.footer {
+    background: white;
+    width: 100%;
+    height: 7vh;
     box-sizing: border-box;
 }
 
-.afterMain{
-    background:#7380F5;
-    width: auto;
-    height: 1000px;
-    box-sizing: border-box;
-}
-.footer{
-    background: #BA73F5;
-    width: auto;
-    height: 100px;
-    box-sizing: border-box;
+.footerText {
+    color: black;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1vw;
 }

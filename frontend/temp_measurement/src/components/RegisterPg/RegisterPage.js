@@ -1,19 +1,10 @@
 import React from "react";
-import {Grid, TextField, Button, Typography, Box, Container} from '@mui/material';
+import {Grid, TextField, Button, Typography, Link} from '@mui/material';
 import { useState } from "react";
+import "./RegisterPage.css";
 
 
 export default function RegisterPage(){
-    const containerCSS = {
-
-        height:'700px',
-        maxWidth: '500px',
-        border: '1px solid',
-        alignItems:'center',
-        justifyContent:'center',
-        background: '#ffffff',
-        borderRadius: '20px'
-    }
     const ButtonCSS = {
         marginRight: "1.7em",
         width: "200px",
@@ -68,15 +59,9 @@ export default function RegisterPage(){
 
 
     return(
-        <Grid
-            container
-            minHeight={"100vh"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            style={{background: 'linear-gradient(90deg, rgba(180,58,87,1) 35%, rgba(252,176,69,1) 97%)'}}
-        >
-            <Container maxWidth={false} sx={containerCSS}>
-                <Typography align={"center"} variant={"h5"}>REJESTRACJA</Typography>
+        <div className={'cont'}>
+            <Grid container style={{ border: '1px solid white', borderRadius: '8px', padding: '16px', maxWidth: '38vh', textAlign: 'center', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',background:'white'}}>
+                <Typography align={"center"} variant={"h5"}>Stwórz swoje konto!</Typography>
                 <TextField
                     variant="outlined"
                     label="Imię"
@@ -152,11 +137,13 @@ export default function RegisterPage(){
                     style={{ marginBottom: "1em" }}
                     type="password"
                 />
+                <Typography variant='h7' style={{ color: 'black', marginBottom: '0.2em'}}>
+                     Masz już konto? <Link href={'/login'}>Zaloguj się!</Link>
+                </Typography>
                     <Button variant="contained" color="error" style={ButtonCSS} href={"/"} >Wróć</Button>
                     <Button variant="contained" color="primary" style={ButtonCSS} onClick={handleRegister}>Zarejestruj się</Button>
 
-                </Container>
         </Grid>
-
+        </div>
     );
 }

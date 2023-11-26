@@ -1,0 +1,8 @@
+.cont {
+    height: 100vh;
+    border: 1px solid;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    background: url('../img/bg_security.jpg') no-repeat center center fixed;
+}
