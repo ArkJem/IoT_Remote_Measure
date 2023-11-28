@@ -7,6 +7,7 @@ export default function LoginPage() {
     const URL = "http://localhost:8080/api/v1/auth/authenticate"
     const [emailValue,setEmailValue] = useState("");
     const [passValue,setPassValue] = useState("");
+    const [emailExists, setEmailExists] = useState(false);
 
 
     const data = {
@@ -25,7 +26,7 @@ export default function LoginPage() {
             body: JSON.stringify(data)
         }).then(response => {
             if (response.status === 403) {
-                throw new Error("Access forbidden");
+                throw new Error("Email already exists!");
             }
             return response.json();
         }).then(data => {
@@ -45,8 +46,10 @@ export default function LoginPage() {
             }
 
         }).catch(error => {
-            if (error.message === "Access forbidden") {
-                console.log("lol");
+            if (error.message === "Email already exists!") {
+                console.log("Email już istnieje!");
+                setEmailExists(true);
+
             } else {
                 console.error("An error occurred:", error);
             }
@@ -67,6 +70,7 @@ export default function LoginPage() {
                     value={emailValue}
                     onChange={(event) => setEmailValue(event.target.value)}
                     placeholder='Wpisz swój email...'
+                    error={emailExists}
                 />
                 <TextField
                     variant='outlined'

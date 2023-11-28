@@ -1,10 +1,12 @@
 package com.example.Temperature_Measurement.auth;
 
 import com.example.Temperature_Measurement.config.JwtService;
+import com.example.Temperature_Measurement.exceptions.RegRequestException;
 import com.example.Temperature_Measurement.users.Role;
 import com.example.Temperature_Measurement.users.User;
 import com.example.Temperature_Measurement.users.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +28,10 @@ public class AuthenticationService {
                 .pass(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
+        if(repository.existsByEmail(request.getEmail()))
+        {
+            throw new RegRequestException("Email already exists!", HttpStatus.BAD_REQUEST);
+        }
         repository.save(user);
         var jwtToken =jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
