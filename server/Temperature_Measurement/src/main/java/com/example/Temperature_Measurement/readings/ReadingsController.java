@@ -7,7 +7,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="api/v1/readings")
-@CrossOrigin(origins = "http://localhost:3000")
 public class ReadingsController {
     private final ReadingsService readingsService;
 
@@ -17,9 +16,8 @@ public class ReadingsController {
     }
 
     @GetMapping
-    public List<Readings> getReadings(){
-        return readingsService.getReadings();
-
+    public List<Readings> getReadings(@RequestParam(name="limit",defaultValue = "10") int limit){
+        return readingsService.getReadings(limit);
     }
     @PostMapping
     public void saveRead(@RequestBody Readings read){

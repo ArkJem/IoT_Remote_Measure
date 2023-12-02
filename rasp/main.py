@@ -7,6 +7,15 @@ import time, json, requests, random
 #roms = ds_sensor.scan()
 #print('Found a ds18x20 device')
 
+def getToken(data, urlToGetToken="http://localhost:8080/api/v1/auth/authenticate"):
+    tt = requests.post(urlToGetToken, json=data)
+    token = tt.json().get("token")
+    return token
+
+url = 'http://localhost:8080/api/v1/readings'
+data = {"email": "ttt", "password": "ttt"}
+authToken = getToken(data)
+
 while True:
   readings = []
   #ds_sensor.convert_temp()
@@ -31,8 +40,14 @@ while True:
 
   time.sleep(0)
   #url only for owner
-  url = 'http://localhost:8080/api/v1/readings'
   data = readings
-  response = requests.post(url, json=data)
+
+  headers = {'Authorization': f'Bearer {authToken}'}
+  response = requests.post(url, json=data, headers=headers)
   #for checking if response server is correct
   print(response,readings)
+
+
+
+
+
