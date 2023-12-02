@@ -20,8 +20,8 @@ export default function LoginPage() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*",
-                "Accept": "application/json"
+                'Access-Control-Allow-Origin': '*',
+                'Accept': 'application/json'
             },
             body: JSON.stringify(data)
         }).then(response => {

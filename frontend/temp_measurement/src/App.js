@@ -36,7 +36,7 @@ function App() {
                <Route path={"/"} element={<FrontPage/>}/>
                <Route path={"/login"} element={<LoginPage/>} />
                <Route path={"/register"} element={<RegisterPage/>} />
-               <Route path={"/chart"} element={<LineChart/>} />
+               <Route path={"/chart"} element={<LineChart />} />
                <Route path={"/Line"} element={<LCharts chartData={userData}/>} />
 
            </Routes>
