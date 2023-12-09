@@ -6,6 +6,8 @@ import * as jose from "jose";
 import jsPDF from "jspdf";
 import * as jspdf from "jspdf";
 import html2canvas from "html2canvas";
+const pdfConverter = require("jspdf");
+
 ChartJS.register(
     CategoryScale,
     LinearScale,
