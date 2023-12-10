@@ -25,7 +25,7 @@ function LCharts() {
   
   const downloadImage = useCallback(() => {
   const link = document.createElement("a");
-  link.download = "chart.pdf";
+  link.download = "chart.png";
   link.href = ref.current.toBase64Image();
   link.click();
 }, []);
