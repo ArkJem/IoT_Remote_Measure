@@ -13,18 +13,6 @@ import LCharts from './components/ChartsPg/LCharts';
 function App() {
     const login = localStorage.getItem('login');
     //const role = localStorage.getItem('role');
-    const [userData, setUserData] = useState({
-        labels: UserData.map((data) => data.year),
-        datasets: [ 
-          {
-            label: "Users Gained",
-            data: UserData.map((data) => data.userGain),
-            backgroundColor: ["#0000FF"],
-            borderColor: "black",
-            borderWidth: 2,
-          },
-        ],
-      });
     return (
        <Router>
            <Routes>
@@ -37,7 +25,7 @@ function App() {
                <Route path={"/login"} element={<LoginPage/>} />
                <Route path={"/register"} element={<RegisterPage/>} />
                <Route path={"/chart"} element={<LineChart />} />
-               <Route path={"/Line"} element={<LCharts chartData={userData}/>} />
+               <Route path={"/Line"} element={<LCharts />} />
 
            </Routes>
        </Router>
