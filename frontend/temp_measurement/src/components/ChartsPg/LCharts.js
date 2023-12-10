@@ -31,11 +31,18 @@ function LCharts() {
 }, []);
 
 return (
-  <div className="Line">
-    <button type ="button" onClick={downloadImage}>Pobierz</button>
+  <div className="Line" style={{alignItems: "center", marginBottom: "5px"}}>
+   
+    
       <div style={{height: "800px", Weight: "800px", margin: "auto"}}>
         <Line ref={ref} data={data}></Line>
       </div>
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "5px"}}>
+      <button type ="button" onClick={downloadImage}>Pobierz</button>
+    </div>
+      
+      
+      
   </div>
   );
 }
