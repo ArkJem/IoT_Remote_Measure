@@ -3,7 +3,6 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { CategoryScale } from "chart.js/auto";
 
-
 const data={
   labels: [2019, 2020, 2021, 2022, 2023],
   datasets: [ 
