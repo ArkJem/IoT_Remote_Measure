@@ -22,6 +22,7 @@ import LineChart from "../ChartsPg/LineChart";
 import {Link} from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout';
 import ReadTempPage from "../ReadTempPg/ReadTempPage";
+import Alert from "../Alerts/AlertPage";
 
 
 const drawerWidth = 240;
@@ -52,7 +53,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
 }));
 
@@ -96,6 +96,7 @@ export default function DashboardPage() {
     const [open, setOpen] = useState(false);
     const [dash, setDash] = useState(false);
     const [chart, setChart] = useState(false);
+
 
 
     const handleDrawerOpen = () => {
@@ -225,6 +226,7 @@ export default function DashboardPage() {
             <Box component="main" sx={{maxWidth:'80vw' ,marginTop:'5vh',marginLeft:'5vw',marginRight:'5vw', flexGrow: 1, p: 3 }}>
                 {dash && <ReadTempPage/>}
                 {chart && <LineChart/>}
+
             </Box>
         </Box>
     );

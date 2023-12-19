@@ -9,22 +9,11 @@ import LineChart from "./components/ChartsPg/LineChart";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import DashboardPage from "./components/DashboardPg/DashboardPage";
 import LCharts from './components/ChartsPg/LCharts';
+import ReadTempPage from "./components/ReadTempPg/ReadTempPage";
 
 function App() {
     const login = localStorage.getItem('login');
     //const role = localStorage.getItem('role');
-    const [userData, setUserData] = useState({
-        labels: UserData.map((data) => data.year),
-        datasets: [ 
-          {
-            label: "Users Gained",
-            data: UserData.map((data) => data.userGain),
-            backgroundColor: ["#0000FF"],
-            borderColor: "black",
-            borderWidth: 2,
-          },
-        ],
-      });
     return (
        <Router>
            <Routes>
