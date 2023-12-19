@@ -26,7 +26,7 @@ export default function LoginPage() {
             body: JSON.stringify(data)
         }).then(response => {
             if (response.status === 403) {
-                throw new Error("Email already exists!");
+                throw new Error("Something went wrong!");
             }
             return response.json();
         }).then(data => {
@@ -46,8 +46,8 @@ export default function LoginPage() {
             }
 
         }).catch(error => {
-            if (error.message === "Email already exists!") {
-                console.log("Email już istnieje!");
+            if (error.message === "Something went wrong!") {
+                console.log("Coś poszło nie tak!");
                 setEmailExists(true);
 
             } else {

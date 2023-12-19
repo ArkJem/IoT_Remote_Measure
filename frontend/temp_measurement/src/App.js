@@ -9,6 +9,7 @@ import LineChart from "./components/ChartsPg/LineChart";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import DashboardPage from "./components/DashboardPg/DashboardPage";
 import LCharts from './components/ChartsPg/LCharts';
+import ReadTempPage from "./components/ReadTempPg/ReadTempPage";
 
 function App() {
     const login = localStorage.getItem('login');

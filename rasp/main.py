@@ -34,9 +34,9 @@ while True:
   #for testing
   """
   readings = {"id_sec":random.randint(0,10),
-        "sens_read_sun":69.0,
-        "sens_read_shadow":13.0,
-        "sens_read_avg": 12.0}
+        "sens_read_sun":random.uniform(2.5, 10.0),
+        "sens_read_shadow":random.uniform(2.5, 10.0),
+        "sens_read_avg": random.uniform(2.5, 10.0)}
 
   time.sleep(0)
   #url only for owner

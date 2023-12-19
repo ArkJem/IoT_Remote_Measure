@@ -2,12 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Chart as ChartJS, LineElement,PointElement,CategoryScale,LinearScale} from "chart.js";
 import {Line} from "react-chartjs-2";
 import {Button, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-import * as jose from "jose";
-import jsPDF from "jspdf";
-import * as jspdf from "jspdf";
-import html2canvas from "html2canvas";
-const pdfConverter = require("jspdf");
-
+import Box from "@mui/material/Box";
+import AlertPage from "../Alerts/AlertPage";
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -21,8 +17,6 @@ const LineChart = () => {
     const [fetchedData, setFetchedData] = useState();
     var url = `http://localhost:8080/api/v1/readings?limit=${limit}`
     var token = localStorage.getItem('token')
-
-    let input = window.document.getElementsByClassName("div2PDF")[0];
 
     const handleChange = (event) =>{
         setLimit(event.target.value);
@@ -40,14 +34,14 @@ const LineChart = () => {
             });
 
             if (response.status === 403) {
-                throw new Error("Email already exists!");
+                throw new Error("Data not fetched!");
             }
 
             const data = await response.json();
             setFetchedData(data);
         } catch (error) {
-            if (error.message === "Email already exists!") {
-                console.log("Email już istnieje!");
+            if (error.message === "Data not fetched!") {
+                console.log("ups")
             } else {
                 console.error("An error occurred:", error);
             }
