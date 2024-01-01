@@ -1,5 +1,6 @@
 #import machine, onewire, ds18x20,
 import time, json, requests, random
+from datetime import datetime
  
 #ds_pin = machine.Pin(16)
 #ds_sensor = ds18x20.DS18X20(onewire.OneWire(ds_pin))
@@ -13,11 +14,13 @@ def getToken(data, urlToGetToken="http://localhost:8080/api/v1/auth/authenticate
     return token
 
 url = 'http://localhost:8080/api/v1/readings'
-data = {"email": "ttt", "password": "ttt"}
+data = {"email": "adminTemp@adminTemp.com", "password": "adminTemp"}
 authToken = getToken(data)
 
 while True:
   readings = []
+  dt = datetime.today()
+  seconds = int(dt.timestamp())
   #ds_sensor.convert_temp()
   #time.sleep_ms(750)
   for rom in range(1):
@@ -33,12 +36,12 @@ while True:
         #'temp': random.randint(-10,10)})
   #for testing
   """
-  readings = {"id_sec":random.randint(0,10),
+  readings = {"idSeconds":seconds,
         "sens_read_sun":random.uniform(2.5, 10.0),
         "sens_read_shadow":random.uniform(2.5, 10.0),
         "sens_read_avg": random.uniform(2.5, 10.0)}
 
-  time.sleep(0)
+  time.sleep(1)
   #url only for owner
   data = readings
 

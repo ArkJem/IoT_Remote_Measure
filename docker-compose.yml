@@ -24,6 +24,9 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/temp_measurement
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=update
+    volumes:
+          - ./database-scripts:/docker-entrypoint-initdb.d
     restart: always
 
   web:

@@ -28,6 +28,8 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/api/v1/readings/**")
                 .permitAll()
+                .requestMatchers("/api/v1/tempavg/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
