@@ -15,7 +15,7 @@ const LineChart = () => {
 
     const [limit, setLimit] = useState(3)
     const [fetchedData, setFetchedData] = useState();
-    var url = `http://localhost:8080/api/v1/readings?limit=${limit}`
+    var url = `http://localhost:8080/api/v1/tempavg?limit=${limit}`
     var token = localStorage.getItem('token')
 
     const handleChange = (event) =>{
@@ -56,10 +56,10 @@ const LineChart = () => {
     }
 
     const data = {
-        labels: fetchedData.map(entry => entry.id_sec),
+        labels: fetchedData.map(entry => entry.date),
         datasets: [{
             label: "Temperatura w słońcu",
-            data: fetchedData.map(entry => entry.sens_read_sun),
+            data: fetchedData.map(entry => entry.avg_read_sun),
             backgroundColor: ['rgb(255,0,54)'],
             borderColor: ['rgb(0,0,0)'],
             borderWidth: 1

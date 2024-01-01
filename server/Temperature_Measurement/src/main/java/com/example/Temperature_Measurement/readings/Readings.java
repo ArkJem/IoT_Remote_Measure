@@ -3,10 +3,12 @@ package com.example.Temperature_Measurement.readings;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(name = "readings")
 public class Readings {
+
     @Id
     @SequenceGenerator(
+            initialValue = 366,
             name = "readings_sequence",
             sequenceName = "readings_sequence",
             allocationSize = 1
@@ -15,7 +17,10 @@ public class Readings {
             strategy = GenerationType.SEQUENCE,
             generator = "readings_sequence"
     )
-    private Long id_sec;
+    @Column(columnDefinition = "serial")
+    private Long id;
+
+    private Long idSeconds;
     private Float sens_read_sun;
     private Float sens_read_shadow;
     private Float sens_read_avg;
@@ -23,19 +28,27 @@ public class Readings {
     public Readings() {
     }
 
-    public Readings(Long id_sec, Float sens_read_sun, Float sens_read_shadow, Float sens_read_avg) {
-        this.id_sec = id_sec;
+    public Readings(Long idSeconds, Float sens_read_sun, Float sens_read_shadow, Float sens_read_avg) {
+        this.idSeconds = idSeconds;
         this.sens_read_sun = sens_read_sun;
         this.sens_read_shadow = sens_read_shadow;
         this.sens_read_avg = sens_read_avg;
     }
 
-    public Long getId_sec() {
-        return id_sec;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_sec(Long id_sec) {
-        this.id_sec = id_sec;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getIdSeconds() {
+        return idSeconds;
+    }
+
+    public void setIdSeconds(Long idSeconds) {
+        this.idSeconds = idSeconds;
     }
 
     public Float getSens_read_sun() {
@@ -65,7 +78,8 @@ public class Readings {
     @Override
     public String toString() {
         return "Readings{" +
-                "id_sec=" + id_sec +
+                "id=" + id +
+                ", idSeconds=" + idSeconds +
                 ", sens_read_sun=" + sens_read_sun +
                 ", sens_read_shadow=" + sens_read_shadow +
                 ", sens_read_avg=" + sens_read_avg +
