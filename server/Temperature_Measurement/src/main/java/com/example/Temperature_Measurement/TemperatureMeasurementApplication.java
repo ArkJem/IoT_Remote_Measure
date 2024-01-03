@@ -3,6 +3,7 @@ package com.example.Temperature_Measurement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,7 +12,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 @SpringBootApplication
-
+@EnableScheduling
 public class TemperatureMeasurementApplication {
 
 	public static void main(String[] args) {

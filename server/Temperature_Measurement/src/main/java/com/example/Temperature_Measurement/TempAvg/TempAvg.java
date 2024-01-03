@@ -1,13 +1,25 @@
 package com.example.Temperature_Measurement.TempAvg;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table
 public class TempAvg {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            initialValue = 366,
+            name = "temp_avg_sequence",
+            sequenceName = "temp_avg_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "temp_avg_sequence"
+    )
+    @Column(columnDefinition = "serial")
     private Long id;
     private Long date;
     private Float avg_read_sun;
@@ -23,21 +35,9 @@ public class TempAvg {
 
     public TempAvg() {}
 
-    public Long getDate() {
-        return date;
-    }
+    public void setId(Long id) {this.id = id;}
 
-    public Float getAvg_read_sun() {
-        return avg_read_sun;
-    }
-
-    public Float getAvg_read_shadow() {
-        return avg_read_shadow;
-    }
-
-    public Float getAvg_sun_shadow() {
-        return avg_sun_shadow;
-    }
+    public void setDate(Long date) { this.date = date;}
 
     public void setDate_sec(Long date) {
         this.date = date;
@@ -58,6 +58,7 @@ public class TempAvg {
     @Override
     public String toString() {
         return "TempAvg{" +
+                "id=" + id +
                 ", date=" + date +
                 ", avg_read_sun=" + avg_read_sun +
                 ", avg_read_shadow=" + avg_read_shadow +

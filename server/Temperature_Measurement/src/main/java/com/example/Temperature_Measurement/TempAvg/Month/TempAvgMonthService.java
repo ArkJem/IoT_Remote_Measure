@@ -25,7 +25,7 @@ public class TempAvgMonthService {
     public List<TempAvg> getReadingsBetweenDates(long startIdSeconds, long endIdSeconds) {
         return tempAvgRepository.findByDateBetween(startIdSeconds, endIdSeconds);
     }
-    @Scheduled(cron = "0 59 23 L * ?")
+    @Scheduled(cron = "0 59 23 L * ?", zone = "Europe/Warsaw")
     public void saveTempAvgFromReadingsForMonth() {
         ZoneId zoneId = ZoneId.of("Europe/Warsaw");
 

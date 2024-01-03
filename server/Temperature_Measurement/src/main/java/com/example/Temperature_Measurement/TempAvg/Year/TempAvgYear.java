@@ -1,8 +1,10 @@
 package com.example.Temperature_Measurement.TempAvg.Year;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 
+@Getter
 @Entity
 @Table
 public class TempAvgYear {
@@ -23,32 +25,16 @@ public class TempAvgYear {
 
     }
 
-    public Long getDate() {
-        return date;
-    }
-
     public void setDate(Long date) {
         this.date = date;
-    }
-
-    public Float getAvg_read_sun_year() {
-        return avg_read_sun_year;
     }
 
     public void setAvg_read_sun_year(Float avg_read_sun_year) {
         this.avg_read_sun_year = avg_read_sun_year;
     }
 
-    public Float getAvg_read_shadow_year() {
-        return avg_read_shadow_year;
-    }
-
     public void setAvg_read_shadow_year(Float avg_read_shadow_year) {
         this.avg_read_shadow_year = avg_read_shadow_year;
-    }
-
-    public Float getAvg_sun_shadow_year() {
-        return avg_sun_shadow_year;
     }
 
     public void setAvg_sun_shadow_year(Float avg_sun_shadow_year) {

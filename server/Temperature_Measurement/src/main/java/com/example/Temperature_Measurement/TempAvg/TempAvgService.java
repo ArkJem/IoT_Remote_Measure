@@ -29,8 +29,10 @@ public class TempAvgService {
         return tempAvgRepository.findByDateBetween(startDate, endDate);
     }
 
-    @Scheduled(cron = "0 59 23 * * *")
+    @Scheduled(cron = "0 13 19 * * *", zone = "Europe/Warsaw")
     public void saveTempAvgFromReadingsForDay() {
+        System.out.println("TEST!");
+        System.out.println(LocalDateTime.now());
         ZoneId zoneId = ZoneId.of("Europe/Warsaw");
         List<Readings> listTest = readingsRepository.findByIdSecondsBetween(LocalDateTime.now(zoneId).toEpochSecond(ZoneOffset.UTC) - 86400, LocalDateTime.now(zoneId).toEpochSecond(ZoneOffset.UTC));
         Float sumSensReadShadow = 0.0F;

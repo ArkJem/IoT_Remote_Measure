@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {Chart as ChartJS, LineElement,PointElement,CategoryScale,LinearScale} from "chart.js";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {CategoryScale, Chart as ChartJS, LinearScale, LineElement, PointElement} from "chart.js";
 import {Line} from "react-chartjs-2";
 import {Button, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-import Box from "@mui/material/Box";
-import AlertPage from "../Alerts/AlertPage";
+
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -17,9 +16,22 @@ const LineChart = () => {
     const [fetchedData, setFetchedData] = useState();
     var url = `http://localhost:8080/api/v1/tempavg?limit=${limit}`
     var token = localStorage.getItem('token')
+    let ref =useRef(null);
+
+    const downloadImage = useCallback(() => {
+        const link = document.createElement("a");
+        link.download = "chart.png";
+        link.href = ref.current.toBase64Image();
+        link.click();
+    }, [ref]);
 
     const handleChange = (event) =>{
         setLimit(event.target.value);
+    };
+
+    const convertUnixToDate = (unixTimestamp) => {
+        const date = new Date(unixTimestamp * 1000);
+        return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
     };
     const fetchData = async () => {
         try {
@@ -56,9 +68,9 @@ const LineChart = () => {
     }
 
     const data = {
-        labels: fetchedData.map(entry => entry.date),
+        labels: fetchedData.map(entry => convertUnixToDate(entry.date)),
         datasets: [{
-            label: "Temperatura w słońcu",
+            label: "Średnia temperatura każdego dnia dla czunjika w słońcu",
             data: fetchedData.map(entry => entry.avg_read_sun),
             backgroundColor: ['rgb(255,0,54)'],
             borderColor: ['rgb(0,0,0)'],
@@ -66,10 +78,6 @@ const LineChart = () => {
         }]
     };
 
-    function chartToPDF() {
-        //TODO: trzeba to kiedyś zrobić
-        console.log("Hubert zrób coś.")
-    }
 
 
 return(
@@ -90,9 +98,9 @@ return(
                 </Select>
             </FormControl>
             <div id={'chart'}>
-                <Line data={data} />
+                <Line ref={ref} data={data} />
             </div>
-            <Button onClick={() => chartToPDF()}>Zapisz do PDF</Button>
+            <Button onClick={() => downloadImage()}>Zapisz do PNG</Button>
 
         </div>
     )

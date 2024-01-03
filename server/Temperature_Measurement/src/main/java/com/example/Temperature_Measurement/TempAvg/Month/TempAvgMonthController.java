@@ -20,7 +20,7 @@ public class TempAvgMonthController {
 
     @GetMapping
     public List<TempAvgMonth> getTempAvgMonth() {
-        tempAvgMonthService.saveTempAvgFromReadingsForMonth();
+        //tempAvgMonthService.saveTempAvgFromReadingsForMonth();
         return tempAvgMonthService.getTempAvgMonth();
     }
 }
