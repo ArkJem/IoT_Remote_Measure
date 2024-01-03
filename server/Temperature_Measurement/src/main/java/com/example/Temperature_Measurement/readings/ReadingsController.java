@@ -16,8 +16,8 @@ public class ReadingsController {
     }
 
     @GetMapping
-    public List<Readings> getReadings(@RequestParam(name="limit",defaultValue = "10") int limit){
-        return readingsService.getReadings(limit);
+    public List<Readings> getReadings(){
+        return readingsService.getReadings();
     }
     @PostMapping
     public void saveRead(@RequestBody Readings read){

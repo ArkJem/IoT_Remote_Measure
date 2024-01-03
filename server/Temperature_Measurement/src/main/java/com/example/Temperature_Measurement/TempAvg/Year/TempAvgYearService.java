@@ -22,7 +22,7 @@ public class TempAvgYearService {
         this.tempAvgYearRepository = tempAvgYearRepository;
     }
 
-    @Scheduled(cron = "0 45 23 31 12 ?")
+    @Scheduled(cron = "0 55 23 31 12 ?", zone = "Europe/Warsaw")
     public void saveTempAvgFromReadingsForYear() {
         ZoneId zoneId = ZoneId.of("Europe/Warsaw");
         LocalDateTime firstDayOfFirstMonth = LocalDateTime.now(zoneId).with(TemporalAdjusters.firstDayOfYear());

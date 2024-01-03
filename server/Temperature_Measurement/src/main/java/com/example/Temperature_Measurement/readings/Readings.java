@@ -1,23 +1,15 @@
 package com.example.Temperature_Measurement.readings;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "readings")
 public class Readings {
 
     @Id
-    @SequenceGenerator(
-            initialValue = 366,
-            name = "readings_sequence",
-            sequenceName = "readings_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "readings_sequence"
-    )
-    @Column(columnDefinition = "serial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long idSeconds;
@@ -35,40 +27,20 @@ public class Readings {
         this.sens_read_avg = sens_read_avg;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdSeconds() {
-        return idSeconds;
     }
 
     public void setIdSeconds(Long idSeconds) {
         this.idSeconds = idSeconds;
     }
 
-    public Float getSens_read_sun() {
-        return sens_read_sun;
-    }
-
     public void setSens_read_sun(Float sens_read_sun) {
         this.sens_read_sun = sens_read_sun;
     }
 
-    public Float getSens_read_shadow() {
-        return sens_read_shadow;
-    }
-
     public void setSens_read_shadow(Float sens_read_shadow) {
         this.sens_read_shadow = sens_read_shadow;
-    }
-
-    public Float getSens_read_avg() {
-        return sens_read_avg;
     }
 
     public void setSens_read_avg(Float sens_read_avg) {

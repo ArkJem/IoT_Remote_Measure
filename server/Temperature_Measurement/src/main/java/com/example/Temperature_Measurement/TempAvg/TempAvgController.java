@@ -22,7 +22,7 @@ public class TempAvgController {
 
     @GetMapping
     public List<TempAvg> getTempAvg(@RequestParam(name="limit",defaultValue = "10") int limit) {
-        tempAvgService.saveTempAvgFromReadingsForDay();
+        //tempAvgService.saveTempAvgFromReadingsForDay();
         return tempAvgService.getTempAvg(limit);
     }
 }
