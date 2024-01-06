@@ -23,6 +23,8 @@ import {Link} from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout';
 import ReadTempPage from "../ReadTempPg/ReadTempPage";
 import Alert from "../Alerts/AlertPage";
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
+import ComaprePage from "../ComparePg/ComparePage";
 
 
 const drawerWidth = 240;
@@ -94,8 +96,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function DashboardPage() {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
-    const [dash, setDash] = useState(false);
+    const [dash, setDash] = useState(true);
     const [chart, setChart] = useState(false);
+    const [compare, setCompare] = useState(false);
 
 
 
@@ -115,11 +118,20 @@ export default function DashboardPage() {
 
     const handleDash = () =>{
         setDash(true);
-        setChart(false)
+        setChart(false);
+        setCompare(false);
+
     };
     const handleChart = () =>{
         setChart(true);
-        setDash(false)
+        setDash(false);
+        setCompare(false);
+
+    };
+    const handleCompare = () =>{
+        setCompare(true);
+        setChart(false);
+        setDash(false);
     };
     return (
         <Box sx={{ display: 'flex' }}>
@@ -174,6 +186,7 @@ export default function DashboardPage() {
                                 <ListItemText primary={'Strona główna'}  sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
+
                             <ListItem onClick={() => handleChart()} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -196,6 +209,30 @@ export default function DashboardPage() {
                                 <ListItemText primary={'Wykresy'} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
+
+                    <ListItem onClick={() => handleCompare()} disablePadding sx={{ display: 'block' }}>
+                        <ListItemButton
+                            sx={{
+                                color:'black',
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <CompareArrowsIcon />
+
+                            </ListItemIcon>
+                            <ListItemText primary={'Wykresy'} sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+
                     <ListItem component={Link} to={'/'} onClick={() => test()} disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
@@ -226,6 +263,7 @@ export default function DashboardPage() {
             <Box component="main" sx={{maxWidth:'80vw' ,marginTop:'5vh',marginLeft:'5vw',marginRight:'5vw', flexGrow: 1, p: 3 }}>
                 {dash && <ReadTempPage/>}
                 {chart && <LineChart/>}
+                {compare && <ComaprePage/>}
 
             </Box>
         </Box>
