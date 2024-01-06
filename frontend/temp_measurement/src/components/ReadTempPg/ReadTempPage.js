@@ -3,9 +3,10 @@ import Box from "@mui/material/Box";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import ThermostatAutoIcon from '@mui/icons-material/ThermostatAuto';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import monthIcon from './icons/month.png';
 import yearIcon from './icons/year.png';
+import {Line} from "react-chartjs-2";
 
 
 const gridTheme = {
@@ -32,12 +33,11 @@ const gridTheme = {
         flexDirection: "column",
     },
     boxTemp: {
-        fontSize:'40px'
+        fontSize:'2vw'
     }
 };
 
 export default function ReadTempPage() {
-    const [fetchedData, setFetchedData] = useState();
     var url = `http://localhost:8080/api/v1/readings`;
     var urlMonth = `http://localhost:8080/api/v1/tempavgmonth`
     var urlYear = `http://localhost:8080/api/v1/tempavgyear`
@@ -47,6 +47,8 @@ export default function ReadTempPage() {
     const [avgTemp, setAvgTemp] = useState();
     const [avgTempMonth, setAvgTempMonth] = useState();
     const [avgTempYear, setAvgTempYear] = useState();
+    const [datach, setDatach] = useState([]);
+
 
     const fetchData = async () => {
         try {
@@ -70,6 +72,10 @@ export default function ReadTempPage() {
                 setSunTemp(data[lastIndex].sens_read_sun);
                 setShadowTemp(data[lastIndex].sens_read_shadow);
                 setAvgTemp(data[lastIndex].sens_read_avg);
+                setDatach(data);
+
+
+                localStorage.setItem("tempAvg", data[lastIndex].sens_read_avg);
 
             } else {
                 console.error("An error with fetching data!");
@@ -151,38 +157,61 @@ export default function ReadTempPage() {
             fetchData();
             fetchMonth();
             fetchYear();
-        }, 3000);
+        }, 1000);
         return () => clearInterval(intervalId);
     }, [sunTemp,shadowTemp,avgTemp,avgTempMonth,avgTempYear]);
 
-    console.log(sunTemp);
+    const convertUnixToDate = (unixTimestamp) => {
+        const date = new Date(unixTimestamp * 1000);
+        return `${date.getHours()}:${date.getMinutes()}`;
+    };
+
+
+    const dataChart = {
+        labels: datach.map(entry => convertUnixToDate(entry.idSeconds)),
+        datasets: [{
+            label: `Zmiany Temperatur w ciągu dnia`,
+            data: datach.map(entry => entry.sens_read_avg),
+            backgroundColor: ['rgb(255,0,54)'],
+            borderColor: ['rgb(0,0,0)'],
+            borderWidth: 1
+        }]
+    };
+
     return (
+        <div>
             <Grid container sx={gridTheme.container}>
                 <Box sx={gridTheme.box}>
-                    <WbSunnyIcon style={{ fontSize: "500%"}} />
+                    <WbSunnyIcon style={{width: '4vw', height: '4vw'}} />
                     Temperatura w słońcu
                     <Box sx={gridTheme.boxTemp}>{sunTemp}°C</Box>
                 </Box>
                 <Box sx={gridTheme.box}>
-                    <BeachAccessIcon style={{ fontSize: "500%"}} />
+                    <BeachAccessIcon style={{width: '4vw', height: '4vw'}} />
                     Temperatura w cieniu
                     <Box sx={gridTheme.boxTemp}>{shadowTemp}°C</Box>
                 </Box>
                 <Box sx={gridTheme.box}>
-                    <ThermostatAutoIcon style={{ fontSize: "500%"}} />
+                    <ThermostatAutoIcon style={{width: '4vw', height: '4vw'}} />
                     Średnia temperatura
                     <Box sx={gridTheme.boxTemp}>{avgTemp}°C</Box>
                 </Box>
                 <Box sx={gridTheme.box}>
-                    <img src={monthIcon} alt="Month Icon" style={{width: '70px', height: '70px'}} />
+                    <img src={monthIcon} alt="Month Icon" style={{width: '4vw', height: '4vw'}} />
                     Średnia temperatura w ostatnim miesiącu
                     <Box sx={gridTheme.boxTemp}>{avgTempMonth}°C</Box>
                 </Box>
                 <Box sx={gridTheme.box}>
-                    <img src={yearIcon} alt="Year Icon" style={{width: '70px', height: '70px'}} />
+                    <img src={yearIcon} alt="Year Icon" style={{width: '4vw', height: '4vw'}} />
                     Średnia temperatura w poprzednim roku
                     <Box sx={gridTheme.boxTemp}>{avgTempYear}°C</Box>
                 </Box>
             </Grid>
+            <Box>
+                <div id={'chart'}>
+                    <Line data={dataChart} />
+                </div>
+            </Box>
+        </div>
     );
 }

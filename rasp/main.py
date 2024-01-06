@@ -1,5 +1,5 @@
 #import machine, onewire, ds18x20,
-import time, json, requests, random
+import time, json, requests, random, schedule
 from datetime import datetime
  
 #ds_pin = machine.Pin(16)
@@ -15,7 +15,11 @@ def getToken(data, urlToGetToken="http://localhost:8080/api/v1/auth/authenticate
 
 url = 'http://localhost:8080/api/v1/readings'
 data = {"email": "adminTemp@adminTemp.com", "password": "adminTemp"}
-authToken = getToken(data)
+authToken = ""
+def job():
+    authToken = getToken(data)
+
+schedule.every(24).minutes.do(job)
 
 while True:
   readings = []
@@ -41,7 +45,7 @@ while True:
         "sens_read_shadow":round(random.uniform(2.5, 10.0),1),
         "sens_read_avg": round(random.uniform(2.5, 10.0),1)}
 
-  time.sleep(1)
+  time.sleep(10)
   #url only for owner
   data = readings
 

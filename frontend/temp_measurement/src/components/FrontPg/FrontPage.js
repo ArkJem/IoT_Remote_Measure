@@ -1,6 +1,4 @@
-import {useTypingEffect} from "./hooks/typing-effect";
 import "./FrontPage.css"
-import {Button} from "@mui/material";
 export default function FrontPage(){
     return(
         <div className={'container'}>

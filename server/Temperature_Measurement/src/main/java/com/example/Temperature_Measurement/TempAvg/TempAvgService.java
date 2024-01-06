@@ -29,7 +29,7 @@ public class TempAvgService {
         return tempAvgRepository.findByDateBetween(startDate, endDate);
     }
 
-    @Scheduled(cron = "0 13 19 * * *", zone = "Europe/Warsaw")
+    @Scheduled(cron = "0 59 23 * * *", zone = "Europe/Warsaw")
     public void saveTempAvgFromReadingsForDay() {
         System.out.println("TEST!");
         System.out.println(LocalDateTime.now());

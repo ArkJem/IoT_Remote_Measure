@@ -363,3 +363,9 @@ INSERT INTO temp_avg (id, date, avg_read_sun, avg_read_shadow, avg_sun_shadow) V
 INSERT INTO temp_avg (id, date, avg_read_sun, avg_read_shadow, avg_sun_shadow) VALUES (363, 1703894400, -11.87863470795031, -13.559743992941916, -9.9);
 INSERT INTO temp_avg (id, date, avg_read_sun, avg_read_shadow, avg_sun_shadow) VALUES (364, 1703980800, -13.893076082059972, -12.332428985385036, -10.83);
 INSERT INTO temp_avg (id, date, avg_read_sun, avg_read_shadow, avg_sun_shadow) VALUES (365, 1704067200, -14.535570438793894, -13.59788588778691, -11.1);
+INSERT INTO temp_avg_month (date, avg_read_sun_month, avg_read_shadow_month, avg_sun_shadow_month) VALUES (1698792900, 13.2, 5, 8.7);
+INSERT INTO temp_avg_month (date, avg_read_sun_month, avg_read_shadow_month, avg_sun_shadow_month) VALUES (1701384900, 6.4, 0.8, 3.5);
+INSERT INTO temp_avg_month (date, avg_read_sun_month, avg_read_shadow_month, avg_sun_shadow_month) VALUES (1704063300, 1.5, -3.5, -1.0);
+INSERT INTO temp_avg_year (date, avg_read_sun_year, avg_read_shadow_year, avg_sun_shadow_year) VALUES (1640991300, 3.3,4.5, 6.2);
+INSERT INTO temp_avg_year (date, avg_read_sun_year, avg_read_shadow_year, avg_sun_shadow_year) VALUES (1672527300, 7.3,9.5, 9.2);
+INSERT INTO temp_avg_year (date, avg_read_sun_year, avg_read_shadow_year, avg_sun_shadow_year) VALUES (1704063300, 5.3,6.5, 7.2);
