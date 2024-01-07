@@ -15,6 +15,12 @@ export default function LoginPage() {
         password:passValue
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleLogin();
+        }
+    };
+
     const handleLogin = async () => {
         await fetch(URL, {
             method: 'POST',
@@ -47,7 +53,7 @@ export default function LoginPage() {
 
         }).catch(error => {
             if (error.message === "Something went wrong!") {
-                console.log("Coś poszło nie tak!");
+                alert("Coś poszło nie tak!");
                 setEmailExists(true);
 
             } else {
@@ -69,6 +75,11 @@ export default function LoginPage() {
                     style={{ marginBottom: '1em' }}
                     value={emailValue}
                     onChange={(event) => setEmailValue(event.target.value)}
+                    inputProps={{
+                        style: { height: 30, width: 400 },
+                        onKeyDown: handleKeyDown
+
+                    }}
                     placeholder='Wpisz swój email...'
                     error={emailExists}
                 />
@@ -77,6 +88,11 @@ export default function LoginPage() {
                     label='Hasło'
                     fullWidth
                     style={{ marginBottom: '1em' }}
+                    inputProps={{
+                        style: { height: 30, width: 400 },
+                        onKeyDown: handleKeyDown
+
+                    }}
                     type='password'
                     value={passValue}
                     onChange={(event) => setPassValue(event.target.value)}

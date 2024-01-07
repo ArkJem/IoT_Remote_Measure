@@ -2,6 +2,7 @@ import React from "react";
 import {Grid, TextField, Button, Typography, Link} from '@mui/material';
 import { useState } from "react";
 import "./RegisterPage.css";
+import {useNavigate} from "react-router-dom";
 
 
 export default function RegisterPage(){
@@ -17,6 +18,15 @@ export default function RegisterPage(){
     const [username, setUsername] = useState("");
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordSame, setPasswordSame] = useState("");
+    const [err,setErr] = useState(false);
+    const [errEmail,setErrEmail] = useState(false);
+    const [errName,setErrName] = useState(false);
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-])[a-zA-Z\d!@#$%^&*()-]{8,}$/;
+    const emailRegex = /^[^@\s_]+@[^\s@]+\.[^\s@]{1,}$/;
+    const navigate = useNavigate();
+
+
 
     const data = {
         surname:surname,
@@ -26,7 +36,30 @@ export default function RegisterPage(){
         password:password,
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleRegister();
+        }
+    };
+
     const handleRegister = () => {
+        if (!username || /\s/g.test(username)) {
+            setErrName(true);
+            return;
+        }
+        if (password !== passwordSame) {
+            setErr(true);
+            alert("Hasła nie są takie same!")
+            return;
+        }
+        if (emailRegex.test(email)) {
+            setErrEmail(false);
+        } else {
+            alert('Niepoprawny email!');
+            setErrEmail(true);
+            return;
+        }
+
         fetch(URL, {
             method: "POST",
             headers: {
@@ -43,11 +76,15 @@ export default function RegisterPage(){
                 return response.json();
             })
             .then(data => {
-                console.log(data);
-            })
+                alert("Pomyślnie zarejestrowano!");
+                if (data?.token) {
+                    setTimeout(() => {
+                        navigate('/login');
+                    }, 1500);
+            }})
             .catch(error => {
                 if (error.message === "Access forbidden") {
-                    console.log("lol");
+                    alert("Email oraz nazwa użtykownika są już zajęte!");
                 }
                 else{
                     console.error("An error occurred:", error);
@@ -68,6 +105,7 @@ export default function RegisterPage(){
                     fullWidth
                     inputProps={{
                         style: { height: 30, width: 400 },
+                        onKeyDown: handleKeyDown
 
                     }}
                     style={{ marginBottom: "1em", marginTop:"1em" }}
@@ -99,6 +137,7 @@ export default function RegisterPage(){
                     style={{ marginBottom: "1em"}}
                     value={username}
                     onChange = {(event) => setUsername(event.target.value)}
+                    error={errName}
 
                 />
             <TextField
@@ -111,6 +150,7 @@ export default function RegisterPage(){
                 style={{ marginBottom: "1em" }}
                 value={email}
                 onChange = {(event) => setEmail(event.target.value)}
+                error ={errEmail}
 
             />
 
@@ -122,6 +162,7 @@ export default function RegisterPage(){
                     type="password"
                     value={password}
                     onChange = {(event) => setPassword(event.target.value)}
+                    error={err}
 
 
                 />
@@ -134,8 +175,12 @@ export default function RegisterPage(){
                         style: { height: 30, width: 400 },
 
                     }}
-                    style={{ marginBottom: "1em" }}
                     type="password"
+                    value={passwordSame}
+                    style={{ marginBottom: "1em" }}
+                    onChange = {(event) => setPasswordSame(event.target.value)}
+                    error={err}
+
                 />
                 <Typography variant='h7' style={{ color: 'black', marginBottom: '0.2em'}}>
                      Masz już konto? <Link href={'/login'}>Zaloguj się!</Link>
