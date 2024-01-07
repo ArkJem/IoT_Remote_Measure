@@ -7,7 +7,6 @@ import RegisterPage from "./components/RegisterPg/RegisterPage";
 import LineChart from "./components/ChartsPg/LineChart";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import DashboardPage from "./components/DashboardPg/DashboardPage";
-import LCharts from './components/ChartsPg/LCharts';
 
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
                <Route path={"/"} element={<FrontPage/>}/>
                <Route path={"/login"} element={<LoginPage/>} />
                <Route path={"/register"} element={<RegisterPage/>} />
-               <Route path={"/Line"} element={<LCharts />} />
+               <Route path={"/chart"} element={<LineChart/>} />
            </Routes>
        </Router>
     );
