@@ -10,7 +10,7 @@ public class TempAvg {
 
     @Id
     @SequenceGenerator(
-            initialValue = 366,
+            initialValue = 371,
             name = "temp_avg_sequence",
             sequenceName = "temp_avg_sequence",
             allocationSize = 1
