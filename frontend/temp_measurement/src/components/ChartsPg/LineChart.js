@@ -7,6 +7,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
+import Papa from 'papaparse';
 
 ChartJS.register(
     CategoryScale,
@@ -104,7 +105,31 @@ const LineChart = () => {
             borderWidth: 1
         }]
     };
+    const handleExportCSV = () => {
+        const csvData = fetchedData.map(item => ({
+          ID: item.id,
+          Date: item.date,
+          Avg_Read_Sun: item.avg_read_sun,
+          Avg_Read_Shadow: item.avg_read_shadow,
+          Avg_Sun_Shadow: item.avg_sun_shadow,
+        }));
+    
+        const csv = Papa.unparse(csvData, {
+          header: true,
+        });
 
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+    
+        if (link.download !== undefined) {
+          const url = URL.createObjectURL(blob);
+          link.setAttribute('href', url);
+          link.setAttribute('download', 'data.csv');
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      };
 
 return(
         <div>
@@ -152,7 +177,7 @@ return(
                     </ListItemIcon>
                 </ListItemButton>
 
-                <ListItemButton>
+                <ListItemButton onClick={() => handleExportCSV()}>
                     <ListItemIcon>
                         <SimCardDownloadIcon />
                         <ListItemText primary={'Zapisz dane do CSV'} />
